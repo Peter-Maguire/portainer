@@ -3,15 +3,19 @@ import { ResourceControlOwnership as RCO } from '@/portainer/access-control/type
 
 angular.module('portainer.app').controller('porAccessControlFormController', [
   '$q',
+  '$scope',
   'UserService',
   'TeamService',
   'Notifications',
   'Authentication',
   'ResourceControlService',
-  function ($q, UserService, TeamService, Notifications, Authentication, ResourceControlService) {
+  function ($q, $scope, UserService, TeamService, Notifications, Authentication, ResourceControlService) {
     var ctrl = this;
 
     ctrl.RCO = RCO;
+
+    this.onAuthorizedTeamsChange = onAuthorizedTeamsChange.bind(this);
+    this.onAuthorizedUsersChange = onAuthorizedUsersChange.bind(this);
 
     ctrl.availableTeams = [];
     ctrl.availableUsers = [];
@@ -29,18 +33,24 @@ angular.module('portainer.app').controller('porAccessControlFormController', [
     }
 
     function setAuthorizedUsersAndTeams(authorizedUsers, authorizedTeams) {
-      angular.forEach(ctrl.availableUsers, function (user) {
-        var found = _.find(authorizedUsers, { Id: user.Id });
-        if (found) {
-          user.selected = true;
-        }
-      });
+      ctrl.formData.AuthorizedTeams = authorizedTeams;
+      ctrl.formData.AuthorizedUsers = authorizedUsers;
+    }
 
-      angular.forEach(ctrl.availableTeams, function (team) {
-        var found = _.find(authorizedTeams, { Id: team.Id });
-        if (found) {
-          team.selected = true;
-        }
+    function onAuthorizedTeamsChange(AuthorizedTeams) {
+      onChange({ AuthorizedTeams });
+    }
+
+    function onAuthorizedUsersChange(AuthorizedUsers) {
+      onChange({ AuthorizedUsers });
+    }
+
+    function onChange(formData) {
+      $scope.$evalAsync(() => {
+        ctrl.formData = {
+          ...ctrl.formData,
+          ...formData,
+        };
       });
     }
 
@@ -69,6 +79,7 @@ angular.module('portainer.app').controller('porAccessControlFormController', [
           return $q.when(ctrl.resourceControl && ResourceControlService.retrieveOwnershipDetails(ctrl.resourceControl));
         })
         .then(function success(data) {
+          console.log({ data });
           if (data) {
             var authorizedUsers = data.authorizedUsers;
             var authorizedTeams = data.authorizedTeams;
