@@ -122,3 +122,13 @@ pr-icon {
   display: flex;
   align-items: center;
 }
+
+.icon.icon-error-alt {
+  fill: var(--ui-red-8);
+  stroke: var(--white-color);
+}
+
+button .icon {
+  width: 13px;
+  height: 13px;
+}
