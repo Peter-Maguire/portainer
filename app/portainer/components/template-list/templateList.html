@@ -10,16 +10,8 @@
           <button type="button" class="btn btn-sm btn-primary" ui-sref="docker.templates.new" ng-if="$ctrl.showAddAction">
             <i class="fa fa-plus space-right" aria-hidden="true"></i>Add template
           </button>
-          <span ng-class="{ 'pull-right': $ctrl.showAddAction }" style="width: 25%">
-            <ui-select ng-model="$ctrl.state.selectedCategory">
-              <ui-select-match placeholder="Select a category" allow-clear="true">
-                <span>{{ $select.selected }}</span>
-              </ui-select-match>
-              <ui-select-choices repeat="category in ($ctrl.state.categories | filter: $select.search)">
-                <span>{{ category }}</span>
-              </ui-select-choices>
-            </ui-select>
-          </span>
+
+          <por-select options="$ctrl.state.categories" value="$ctrl.state.selectedCategory" placeholder="'Select a category'" on-change="($ctrl.onCategoryChange)"> </por-select>
         </div>
 
         <div class="small text-muted" style="margin: 15px 0 0 5px">

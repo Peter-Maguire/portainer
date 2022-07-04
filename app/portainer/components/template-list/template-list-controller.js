@@ -2,7 +2,8 @@ import _ from 'lodash-es';
 
 angular.module('portainer.app').controller('TemplateListController', TemplateListController);
 
-function TemplateListController($async, $state, DatatableService, Notifications, TemplateService) {
+/* @ngInject */
+function TemplateListController($async, $state, $scope, DatatableService, Notifications, TemplateService) {
   var ctrl = this;
 
   this.state = {
@@ -30,6 +31,14 @@ function TemplateListController($async, $state, DatatableService, Notifications,
     return false;
   };
 
+  this.onCategoryChange = onCategoryChange.bind(this);
+
+  function onCategoryChange(value) {
+    $scope.$evalAsync(() => {
+      this.state.selectedCategory = value;
+    });
+  }
+
   this.updateCategories = function () {
     var availableCategories = [];
 
@@ -40,7 +49,7 @@ function TemplateListController($async, $state, DatatableService, Notifications,
       }
     }
 
-    this.state.categories = _.sortBy(_.uniq(availableCategories));
+    this.state.categories = _.sortBy(_.uniq(availableCategories)).map((template) => ({ label: template, value: template }));
   };
 
   this.filterByCategory = function (item) {
