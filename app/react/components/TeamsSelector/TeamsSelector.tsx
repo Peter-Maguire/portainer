@@ -25,7 +25,7 @@ export function TeamsSelector({
 
   const values = options.filter((option) => value.includes(option.value));
   return (
-    <Select
+    <Select<number>
       name={name}
       isMulti
       options={options}

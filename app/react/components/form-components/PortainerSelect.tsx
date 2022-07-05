@@ -32,6 +32,7 @@ interface SingleProps<TValue> extends SharedProps {
   value: TValue;
   onChange(value: TValue | null): void;
   options: Options<TValue>;
+  isMulti?: never;
 }
 
 type Props<TValue> = MultiProps<TValue> | SingleProps<TValue>;
