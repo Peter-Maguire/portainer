@@ -208,7 +208,6 @@ input:checked + .slider:before {
 
 .toolBar > .actionBar {
   margin-right: 10px;
-  display: inline-flex;
 }
 
 .datatable .actionBar {
