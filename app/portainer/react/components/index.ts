@@ -16,7 +16,7 @@ import { Tooltip } from '@@/Tip/Tooltip';
 import { DashboardItem } from '@@/DashboardItem';
 import { SearchBar } from '@@/datatables/SearchBar';
 import { TeamsSelector } from '@@/TeamsSelector';
-import { MultiSelect, Select } from '@@/form-components/PortainerSelect';
+import { Select } from '@@/form-components/PortainerSelect';
 
 import { fileUploadField } from './file-upload-field';
 import { switchField } from './switch-field';
@@ -85,29 +85,17 @@ export const componentsModule = angular
     ])
   )
   .component(
-    'porMultiSelect',
-    r2a(MultiSelect, [
-      'data-cy',
-      'inputId',
-      'name',
-      'value',
-      'onChange',
-      'options',
-      'placeholder',
-      'disabled',
-    ])
-  )
-  .component(
     'porSelect',
     r2a(Select, [
       'name',
-      'data-cy',
       'inputId',
+      'placeholder',
+      'disabled',
+      'data-cy',
+
       'value',
       'onChange',
       'options',
-      'placeholder',
-      'disabled',
     ])
   )
   .component(
