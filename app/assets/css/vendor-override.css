@@ -224,16 +224,6 @@ json-tree .branch-preview {
   background-color: var(--bg-progress-color);
 }
 
-.ui-select-bootstrap .ui-select-choices-row > span {
-  color: var(--text-ui-select-color);
-}
-
-.ui-select-bootstrap .ui-select-choices-row > span:hover,
-.ui-select-bootstrap .ui-select-choices-row > span:focus {
-  background-color: var(--bg-ui-select-hover-color);
-  color: var(--text-ui-select-hover-color);
-}
-
 .motd-body {
   background-color: var(--bg-motd-body-color) !important;
 }
